@@ -29,6 +29,9 @@
     /* Typography */
     --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
     --font-mono: 'Courier New', monospace;
+
+    /* Fluid Typography new : */
+    font-size: clamp(14px, 2vw, 18px);
 }
 
 body {
@@ -60,8 +63,14 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: var(--spacing-sm);
 }
 
-h1 { font-size: 3rem; }
-h2 { font-size: 2.5rem; }
+/*h1 { font-size: 3rem; }
+h2 { font-size: 2.5rem; }*/
+h1 {
+    font-size: clamp(2rem, 5vw, 4rem);
+}
+h2 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
 h3 { font-size: 1.5rem; }
 
 p {
@@ -79,7 +88,34 @@ a:hover {
 }
 
 /* Navigation Bar - TO BE ENHANCED WITH FLEXBOX */
+/* New code: */
 #navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: bold;
+    color: white;
+}
+/*#navbar {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     padding: var(--spacing-sm) var(--spacing-md);
     position: sticky;
@@ -96,7 +132,7 @@ a:hover {
 
 .nav-menu {
     list-style: none;
-}
+}*/
 
 .nav-menu li {
     display: inline-block;
@@ -134,11 +170,25 @@ a:hover {
 }
 
 /* Hero Section - TO BE ENHANCED WITH FLEXBOX */
-.hero {
+/*.hero {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     color: var(--white);
     padding: var(--spacing-xl) var(--spacing-md);
     min-height: 60vh;
+}*/
+.hero {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.hero-content {
+    max-width: 800px;
 }
 
 .hero-title {
@@ -159,7 +209,25 @@ a:hover {
 }
 
 /* Buttons */
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
 .btn {
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+/*.btn {
     display: inline-block;
     padding: 0.75rem 2rem;
     border-radius: 50px;
@@ -168,7 +236,7 @@ a:hover {
     border: none;
     cursor: pointer;
     text-align: center;
-}
+}*/
 
 .btn-primary {
     background: var(--white);
@@ -232,6 +300,25 @@ a:hover {
 
 /* Skills Section - TO BE TRANSFORMED WITH GRID */
 .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.skill-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+/*.skills-grid {
     margin-top: var(--spacing-md);
 }
 
@@ -247,7 +334,7 @@ a:hover {
 .skill-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-}
+}*/
 
 .skill-header {
     margin-bottom: var(--spacing-sm);
@@ -268,7 +355,7 @@ a:hover {
     margin-bottom: var(--spacing-sm);
 }
 
-.skill-level {
+/*.skill-level {
     height: 8px;
     background: #e2e8f0;
     border-radius: 4px;
@@ -282,6 +369,20 @@ a:hover {
     width: var(--skill-level);
     transition: width 1s ease;
     animation: fillProgress 1s ease forwards;
+}*/
+.skill-level {
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.skill-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    width: var(--skill-level);
+    transition: width 1s ease;
 }
 
 @keyframes fillProgress {
@@ -295,39 +396,7 @@ a:hover {
 }
 
 /* Projects Section - TO BE ENHANCED WITH GRID */
-/* Filter Buttons - Week 7 Addition */
-.filter-buttons {
-    display: flex;
-    justify-content: center;
-    gap: var(--spacing-sm);
-    margin: var(--spacing-md) 0;
-    flex-wrap: wrap;
-}
-
-.filter-btn {
-    padding: var(--spacing-xs) var(--spacing-md);
-    border: 2px solid var(--primary-color);
-    background: transparent;
-    color: var(--primary-color);
-    border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-.filter-btn:hover {
-    background: var(--primary-color);
-    color: var(--white);
-    transform: translateY(-2px);
-}
-
-.filter-btn.active {
-    background: var(--primary-color);
-    color: var(--white);
-}
-
-.projects-grid {
+/*.projects-grid {
     margin-top: var(--spacing-md);
 }
 
@@ -338,6 +407,26 @@ a:hover {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     margin-bottom: var(--spacing-md);
     transition: transform 0.3s ease;
+}*/
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+/* Featured project spans multiple cells */
+.project-card.featured {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.project-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .project-card:hover {
@@ -404,12 +493,32 @@ a:hover {
     padding: var(--spacing-md);
 }
 
-.project-header {
+/*.project-header {
     margin-bottom: var(--spacing-sm);
 }
 
 .project-title {
     color: var(--text-dark);
+}*/
+.project-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 1.5rem;
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: auto; /* Pushes tags to bottom */
 }
 
 .project-category {
@@ -426,9 +535,9 @@ a:hover {
     margin-bottom: var(--spacing-sm);
 }
 
-.project-tags {
+/*.project-tags {
     margin-top: var(--spacing-sm);
-}
+}*/
 
 .project-tag {
     display: inline-block;
@@ -482,34 +591,6 @@ a:hover {
     resize: vertical;
 }
 
-/* Form Validation Styles - Week 7 Addition */
-.error-message {
-    color: #dc2626;
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
-    display: block;
-}
-
-.form-group input.error,
-.form-group textarea.error {
-    border-color: #dc2626;
-}
-
-.form-group input.success,
-.form-group textarea.success {
-    border-color: #059669;
-}
-
-.success-message {
-    background: #d1fae5;
-    color: #059669;
-    padding: var(--spacing-sm);
-    border-radius: 8px;
-    margin-top: var(--spacing-md);
-    text-align: center;
-    font-weight: 500;
-}
-
 /* Footer */
 .footer {
     background: var(--bg-dark);
@@ -559,3 +640,82 @@ a:hover {
 .mb-1 { margin-bottom: var(--spacing-sm); }
 .mb-2 { margin-bottom: var(--spacing-md); }
 .mb-3 { margin-bottom: var(--spacing-lg); }
+
+/* New for Week 6 Style: */
+/* Filter Buttons */
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.5rem 1.5rem;
+    border: 2px solid #667eea;
+    background: transparent;
+    color: #667eea;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.filter-btn:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background: #667eea;
+    color: white;
+}
+
+/* Form Validation Styles */
+.error-message {
+    color: #dc2626;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.form-group input.error,
+.form-group textarea.error {
+    border-color: #dc2626;
+}
+
+.success-message {
+    background: #d1fae5;
+    color: #059669;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    text-align: center;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background-color: #fff;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0,0,0,0.05);
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-toggle {
+        display: block;
+        cursor: pointer;
+    }
+}
